@@ -22,8 +22,37 @@
           <dd><%= @product.quantity %></dd>
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
-        </dl>
+          <dt>Average Rating</dt>
+          <dd><b><%= @product.reviews.average(:rating) %></b></dd>
+
+    <% if current_user %>
+      <dd><h2>Create a review</h2></dd>
+        <%= form_for([@product,@review]) do |f| %>
+        <dt><%= f.label :rating %>:</dt>
+        <dd><%= f.select :rating, [1,2,3,4,5] %><br /></dd>
+
+        <dt><%= f.label :description %>:</dt>
+        <dd><%= f.text_area :description %><br /><dd>
+        <%= f.submit %>
+      <% end %>
+      </dd>
+      </dl>
       </div>
+    <% end %>
+     </dl>
+      </div>
+    </div>
+
+    <div class= "row">
+      <h2>Reviews</h2>
+      <table class= "table">
+
+        <% @product.reviews.reverse_each do |review| %>
+          <tr>
+          <%= render review %>
+          </tr>
+        <% end %>
+      </table>
     </div>
 
   </article>
