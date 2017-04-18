@@ -4,8 +4,8 @@ RSpec.describe Product, type: :model do
   describe 'Validations' do
 
     it "is saved successfully" do
-      catTest = Category.find_or_create_by! name: 'testcat'
-      product = catTest.products.create!({
+      @catTest = Category.find_or_create_by! name: 'testcat'
+      product = @catTest.products.create!({
         name:  'test',
         description: 'test',
         quantity: 1,
